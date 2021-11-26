@@ -6,7 +6,7 @@ import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase('city_db.db');
 
 const Home = ({ navigation }) => {
-  //    useEffect(() => {
+
   db.transaction(function (txn) {
     txn.executeSql(
       "SELECT name FROM sqlite_master WHERE type='table' AND name='tbl_city'",
@@ -23,7 +23,6 @@ const Home = ({ navigation }) => {
       }
     );
   });
-  //    }, []);
 
   return (
     <View style={styles.container}>

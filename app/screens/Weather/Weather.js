@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, Alert } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import axios from 'axios';
 
@@ -33,7 +33,8 @@ function Weather({ route, navigation }) {
           setInfoCity({
             ciudad: userCity.city_name,
             pais: info.sys.country,
-            condiciones: info.weather[0].description,
+            //condiciones: info.weather[0].description,
+            condiciones: info.weather[0].icon,
             temperatura: info.main.temp,
             temp_max: info.main.temp_max,
             temp_min: info.main.temp_min,
@@ -55,10 +56,14 @@ function Weather({ route, navigation }) {
     <View style={styles.container}>
       <Text>Weather City</Text>
       <Text>{route.params.paramKey}</Text>
+      
+      <Image
+          style={{width: 150, height: 150}}
+          source={{uri: `https://openweathermap.org/img/wn/${infoCity.condiciones}@2x.png`}}
+        />
       <View>
         <Text>Ciudad: {ciudad}</Text>
         <Text>Pais: {infoCity.pais}</Text>
-        <Text>Condiciones: {infoCity.condiciones} </Text>
         <Text>Temperatura: {infoCity.temperatura} °C </Text>
         <Text>Max/Min: {infoCity.temp_max}°C / {infoCity.temp_min}°C</Text>
         <Text>Humedad: {infoCity.humedad} % </Text>

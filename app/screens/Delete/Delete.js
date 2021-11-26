@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, Alert } from 'react-native';
-//import {openDatabase} from 'react-native-sqlite-storage';
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('city_db.db');
 
 const Delete = ({ route, navigation }) => {
-  let [userCity, setUserCity] = useState({});
+//  let [userCity, setUserCity] = useState({});
 
   let deleteCity = () => {
     db.transaction((tx) => {

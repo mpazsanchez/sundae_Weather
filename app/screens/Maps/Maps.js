@@ -29,28 +29,45 @@ const Maps = ({ route, navigation }) => {
   function registerCity() {
     db.transaction((tx) => {
       tx.executeSql(
-        'INSERT INTO tbl_city (city_name, city_state, city_country, latitud, longitud) VALUES (?,?,?,?,?)',
-        [ciudad, provincia, pais, lat, lon],
+        'SELECT * FROM tbl_city where latitud = ? AND longitud = ?',
+        [lat, lon],
         (tx, results) => {
-          console.log('Results', results.rowsAffected);
-          if (results.rowsAffected > 0) {
-            Alert.alert(
-              'Success',
-              'La ciudad ha sido agregada correctamente',
+          var len = results.rows.length;
+          if (len > 0) {
+            Alert.alert('Advertencia', 'La ciudad ya se encuentra en el listado',
               [
                 {
                   text: 'Ok',
-                  onPress: () => navigation.navigate('ViewAllCities'),
-                },
+                  onPress: () => navigation.navigate('Add'),
+                }
               ],
               { cancelable: false },
             );
           } else {
-            alert('La ciudad no se agrego');
+          tx.executeSql(
+            'INSERT INTO tbl_city (city_name, city_state, city_country, latitud, longitud) VALUES (?,?,?,?,?)',
+            [ciudad, provincia, pais, lat, lon],
+            (tx, results) => {
+//              console.log('Results', results.rowsAffected);
+              if (results.rowsAffected > 0) {
+                Alert.alert(
+                  'Success',
+                  'La ciudad ha sido agregada correctamente',
+                  [
+                    {
+                      text: 'Ok',
+                      onPress: () => navigation.navigate('ViewAllCities'),
+                    },
+                  ],
+                  { cancelable: false },
+                );
+              } else {
+                alert('La ciudad no se agrego');
+              }
+            });
           }
         });
     });
-    console.log(lat, lon);
   }
 
   return (

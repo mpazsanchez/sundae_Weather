@@ -36,7 +36,7 @@ const addCityValidationSchema = yup.object().shape({
 });
 
 const Add = ({ navigation }) => {
-  //useState para tomar las coordenadas
+  // useState para tomar las coordenadas
   const [coordCity, setCoordCity] = useState({});
 
   // Al actualizar coordenadas, ubica la ciudad en el mapa

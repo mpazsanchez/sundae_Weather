@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View, FlatList, SafeAreaView, TouchableOpacity, StyleSheet, StatusBar, Button } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 
@@ -8,8 +8,6 @@ const db = SQLite.openDatabase('city_db.db');
 const ViewAllCities = ({ navigation }) => {
   let [flatListItems, setFlatListItems] = useState([]);
 
-  //Consulta a la DB
-  //  useEffect(() => {
   db.transaction((tx) => {
     tx.executeSql('SELECT * FROM tbl_city',
       [],
@@ -20,7 +18,6 @@ const ViewAllCities = ({ navigation }) => {
         setFlatListItems(temp);
       });
   });
-  //  }, []);
 
   //Listar los item
   let listItemView = (item) => {
