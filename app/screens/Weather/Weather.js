@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, Image, Alert } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import axios from 'axios';
+import iconRef from '../../utils/iconRef.js';
 
 const db = SQLite.openDatabase('city_db.db');
 
@@ -54,13 +55,14 @@ function Weather({ route, navigation }) {
   const { ciudad, pais, condiciones, temperatura, humedad, viento } = infoCity;
   return (
     <View style={styles.container}>
-      <Text>Weather City</Text>
-      <Text>{route.params.paramKey}</Text>
+      <Text>Veamos como esta el Clima</Text>
       
       <Image
           style={{width: 150, height: 150}}
-          source={{uri: `https://openweathermap.org/img/wn/${infoCity.condiciones}@2x.png`}}
+//        source={{uri: `https://openweathermap.org/img/wn/${infoCity.condiciones}@2x.png`}}
+          source={iconRef[infoCity.condiciones]}
         />
+
       <View>
         <Text>Ciudad: {ciudad}</Text>
         <Text>Pais: {infoCity.pais}</Text>
@@ -68,6 +70,7 @@ function Weather({ route, navigation }) {
         <Text>Max/Min: {infoCity.temp_max}°C / {infoCity.temp_min}°C</Text>
         <Text>Humedad: {infoCity.humedad} % </Text>
         <Text>Viento: {infoCity.viento} km/h</Text>
+        <Text>Condiciones: {infoCity.condiciones}</Text>
       </View>
       <View style={styles.btn_row} >
         <Button
