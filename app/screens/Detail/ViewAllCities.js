@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  FlatList,
-  SafeAreaView,
-  TouchableOpacity,
-  StyleSheet,
-  StatusBar,
-  Button,
-} from "react-native";
-import * as SQLite from "expo-sqlite";
+import React, { useEffect, useState } from 'react';
+import { Text, View, FlatList, SafeAreaView, TouchableOpacity, StyleSheet, StatusBar, Button, ImageBackground } from 'react-native';
+import * as SQLite from 'expo-sqlite';
+import Bg from '../../assets/bg-gradient.jpg';
+
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { SearchBar } from "react-native-elements";
 
 //Conexion a la DB
@@ -48,6 +44,7 @@ const ViewAllCities = ({ navigation }) => {
   }, []);
 
   return (
+    <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
     <SafeAreaView style={styles.container}>
       <SearchBar
         placeholder="Filtra las ciudades"
@@ -55,88 +52,174 @@ const ViewAllCities = ({ navigation }) => {
         value={search}
       />
       <FlatList
+        style={styles.cards_container} 
         data={filteredItems || flatListItems}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <View key={item.city_id} style={styles.item}>
-            <Text>Id: {item.city_id}</Text>
-            <Text>City: {item.city_name}</Text>
-            <Text>State: {item.city_state}</Text>
-            <Text>Country: {item.city_country}</Text>
-            <Text>Latitude: {item.latitud}</Text>
-            <Text>Longitude: {item.longitud}</Text>
 
-            <View style={styles.btn_row}>
-              <Button
-                title="Weather"
-                color="#CD5C5C"
-                onPress={() =>
-                  navigation.navigate("Weather", { paramKey: item.city_id })
-                }
-              ></Button>
+          <View key={item.city_id} style={styles.card}>
+            <Text style={styles.card_text_temp}>25º{item.city_temp}</Text>
+            <Text style={styles.card_conditions}>10º/28º, Soleado {item.city_X}</Text>
+            <Text style={styles.card_text}>{item.city_name}, {item.city_country}</Text>
 
-              <Button
-                title="Delete"
-                color="#CD5C5C"
-                onPress={() =>
-                  navigation.navigate("Delete", { paramKey: item.city_id })
-                }
-              ></Button>
+            <View style={styles.btn_row} >
+
+            <TouchableOpacity
+                title='Detalles'
+                style={styles.btn_card}
+                onPress={() => navigation.navigate('Weather', { paramKey: item.city_id, })}>
+
+                <Text style={styles.btn_card_text} >Clima</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                title='Eliminar'
+                style={styles.btn_card}
+                onPress={() => navigation.navigate('Delete', { paramKey: item.city_id, })}
+              >
+              <Text style={styles.btn_card_text} >Eliminar</Text>
+            </TouchableOpacity>
             </View>
+
+
           </View>
         )}
       />
       <View style={styles.add_row}>
+
         <TouchableOpacity
-          style={styles.btn}
-          onPress={() => navigation.navigate("Add")}
-        >
-          <Text>Add</Text>
+          style={styles.btn_add} activeOpacity={0.7}
+          onPress={() => navigation.navigate('Add')}>
+
+        <FontAwesomeIcon icon={ faPlus } style={ styles.icon } />
         </TouchableOpacity>
-      </View>
+
+        </View>
     </SafeAreaView>
+    </ImageBackground>
   );
 };
 
+//----- Estilos -----
 const styles = StyleSheet.create({
+
+  //----- Estilos contenedores -----
   container: {
     flex: 1,
-    justifyContent: "space-around",
-    backgroundColor: "#FDEDEC",
+    justifyContent: 'space-around',
+    width: '100%',
   },
-  item: {
-    backgroundColor: "white",
-    padding: 5,
-    paddingHorizontal: 40,
-    marginTop: StatusBar.currentHeight || 0,
+
+  bg: {
+    flex: 1,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
+
+  cards_container: {
+    width: '100%',
+  },
+
+
+  //----- Estilos card ----- 
+  card: {
+    padding: 10,
+    margin: 7,
+    marginHorizontal: 8,
+    borderRadius: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.270)',
+ 
+  },
+
+  card_text: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: "400",
+    paddingTop: 8,
+  },
+
+  card_text_temp: {
+    color: 'white',
+    fontSize: 25,
+    fontWeight: "500",
+  },
+
+  card_conditions: {
+    color: 'white',
+    fontSize: 15,
+    paddingTop: 8,
+
+  },
+  //----- Botones card 
+  btn_card: {
+    marginTop: 12,
+    borderRadius: 15,
+    backgroundColor: '#ff9696d0',
+    height: 40,
+    width: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+
+  },
+
+  btn_card_text: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "500",
+    letterSpacing: 1,
+  },
+
+  //Otros botones
+  btn_row: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignContent: 'center',
+  },
+
+  btn_add: {
+    backgroundColor: '#fae4e4',
+    color: '#FF9696',
+
+    shadowColor: "#000",
+    shadowOffset: {
+    width: 0,
+    height: 2,
+    },
+    shadowOpacity: 0.50,
+    shadowRadius: 3.84,
+    elevation: 5,
+    display: 'flex',
+
+    position: 'absolute',
+    bottom: 30,
+    right: 30,
+
+    alignItems: "center",
+    justifyContent: "center",
+   
+    width: 65,
+    height: 65,
+    borderRadius: 100,
+  },
+
+  icon: {
+    color: '#FF9696',
+  },
+
   title: {
     fontSize: 16,
   },
-  btn: {
-    bottom: 70,
-    height: 60,
-    width: 60,
-    borderRadius: 100,
-    backgroundColor: "#CD5C5C",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  add_row: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  btn_row: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignContent: "center",
-  },
+  
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: 22
   },
   modalView: {
     margin: 20,
@@ -147,16 +230,16 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 5
   },
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2,
+    elevation: 2
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
@@ -167,11 +250,11 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "center"
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center",
+    textAlign: "center"
   },
 });
 

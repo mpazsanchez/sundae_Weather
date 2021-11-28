@@ -17,14 +17,21 @@ const App = () => {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
+            <Stack.Navigator 
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: '#fae4e4',
+                },
+                headerTintColor: '#FF9696',
+        
+      }}>
+        <Stack.Screen name="Home" component={Home} options={ {title: 'Home'} }/>
         <Stack.Screen name="Detail" component={Detail} />
-        <Stack.Screen name="Maps" component={Maps} />
-        <Stack.Screen name="Weather" component={Weather} />
-        <Stack.Screen name="Add" component={Add} />
-        <Stack.Screen name="ViewAllCities" component={ViewAllCities} />
-        <Stack.Screen name="Delete" component={Delete} />
+        <Stack.Screen name="Maps" component={Maps} options={ {title: 'Ubicación'} }/>
+        <Stack.Screen name="Weather" component={Weather} options={ {title: 'Clima actual'} }/>
+        <Stack.Screen name="Add" component={Add} options={ {title: 'Agregar ciudad'} } />
+        <Stack.Screen name="ViewAllCities" component={ViewAllCities} options={ {title: 'Mis ciudades'} } />
+        <Stack.Screen name="Delete" component={Delete} options={ {title: 'Eliminar ciudad'} } />
       </Stack.Navigator>
     </NavigationContainer>
 

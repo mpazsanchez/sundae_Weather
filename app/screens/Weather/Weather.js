@@ -65,10 +65,9 @@ function Weather({ route, navigation }) {
 
                     <Text style={styles.card_text_temp}>{infoCity.temperatura}°</Text>
                   <Image
-                      style={{width: 70, height: 70}}
+                      style={{width: 85, height: 85}}
                       source={iconRef[infoCity.condiciones]}
                     />
-
 
                     <Text style={styles.card_text_tempMax}>
                     {infoCity.temp_max}°/{infoCity.temp_min}°</Text>
