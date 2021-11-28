@@ -1,7 +1,13 @@
-import React, { useEffect } from 'react';
-import { Text, View, Animated, StyleSheet, Button } from 'react-native';
-import Fondo from '../../assets/sundae.png';
+import React, {useEffect} from 'react';
+import {Text, View, Animated, StyleSheet, Button, ImageBackground, TouchableOpacity} from 'react-native';
+import Logo from '../../assets/sundae.png';
+import LogoText from '../../assets/logo.png';
 import * as SQLite from 'expo-sqlite';
+import Bg from '../../assets/bg-gradient.jpg';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
+
 
 const db = SQLite.openDatabase('city_db.db');
 
@@ -25,47 +31,78 @@ const Home = ({ navigation }) => {
   });
 
   return (
+    <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
     <View style={styles.container}>
-      <Animated.Image source={Fondo} style={styles.image} />
-      <Animated.Text style={styles.text}>Sundae Weather</Animated.Text>
+        <Animated.Image source={Logo} style={styles.image} />
+          <Animated.Image source={LogoText} style={styles.imageText} />
+
       <Text style={styles.descripcion}>
-        Informacion del proyecto, proposito de la aplicacion, descripcion de
-        funcionalidades y uso de la misma.
+      ¡Busca tu ciudad y accede al pronostico en tiempo real!
       </Text>
-      <Button
-        title="Iniciar"
-        color="#CD5C5C"
+      
+      <TouchableOpacity
+         title="Iniciar"
+         style={styles.btn}
+         activeOpacity={0.7}
         onPress={() => navigation.navigate('ViewAllCities')}
-      />
+      >
+         <FontAwesomeIcon icon={ faArrowDown } style={styles.icon} />
+        </TouchableOpacity>
+
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
+    display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#FDEDEC',
+    justifyContent: 'space-around',
   },
+
+  bg: {
+    flex: 1,
+    width: '100%',
+  },
+
   image: {
-    width: 200,
-    height: 200,
+    marginTop: 50,
+    width: 150,
+    height: 150,
+
+  },
+  imageText: {
+    width: 280,
+    height: 150,
     resizeMode: 'contain',
+    
   },
-  text: {
-    // fontFamily: 'FredokaOne-Regular',
-    color: '#CD5C5C',
-    fontSize: 50,
-  },
+
   descripcion: {
-    // fontFamily: 'Gluten-Bold',
-    color: '#CD5C5C',
+    color: '#ffffff',
     fontSize: 20,
     textAlign: 'center',
+    width: '80%',
+ 
   },
   btn: {
-    color: '#CD5C5C',
+    color: 'white',
+    height: 45,
+    width: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  icon: {
+    color: 'white',
+    height: 30,
+    width: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
 });
 export default Home;
