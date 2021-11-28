@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, Button, Image, StyleSheet, Alert, ImageBackground } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import axios from 'axios';
 import iconRef from '../../utils/iconRef.js';
+import Bg from '../../assets/bg-gradient.jpg';
 
 const db = SQLite.openDatabase('city_db.db');
 
@@ -54,32 +55,35 @@ function Weather({ route, navigation }) {
 
   const { ciudad, pais, condiciones, temperatura, humedad, viento } = infoCity;
   return (
-    <View style={styles.container}>
-      <Text>Veamos como esta el Clima</Text>
-      
-      <Image
-          style={{width: 150, height: 150}}
-//        source={{uri: `https://openweathermap.org/img/wn/${infoCity.condiciones}@2x.png`}}
-          source={iconRef[infoCity.condiciones]}
-        />
+    <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
+      <View style={styles.container}>
 
-      <View>
-        <Text>Ciudad: {ciudad}</Text>
-        <Text>Pais: {infoCity.pais}</Text>
-        <Text>Temperatura: {infoCity.temperatura} °C </Text>
-        <Text>Max/Min: {infoCity.temp_max}°C / {infoCity.temp_min}°C</Text>
-        <Text>Humedad: {infoCity.humedad} % </Text>
-        <Text>Viento: {infoCity.viento} km/h</Text>
-        <Text>Condiciones: {infoCity.condiciones}</Text>
+
+                <View style={styles.card}>
+
+                    <Text style={styles.card_title}>{ciudad}, {infoCity.pais}</Text>
+
+                    <Text style={styles.card_text_temp}>{infoCity.temperatura}°</Text>
+                  <Image
+                      style={{width: 70, height: 70}}
+                      source={iconRef[infoCity.condiciones]}
+                    />
+
+
+                    <Text style={styles.card_text_tempMax}>
+                    {infoCity.temp_max}°/{infoCity.temp_min}°</Text>
+
+                    <View style={styles.card_info}> 
+                        <Text style={styles.card_text}>Condiciones: {infoCity.condiciones}</Text>
+                        <Text style={styles.card_text}>Humedad: {infoCity.humedad} % </Text>
+                        <Text style={styles.card_text}>Viento: {infoCity.viento} m/s</Text>
+                    </View>
+
+                </View>
+
+
       </View>
-      <View style={styles.btn_row} >
-        <Button
-          title="Cerrar"
-          color="#CD5C5C"
-          onPress={() => navigation.push('ViewAllCities')}
-        />
-      </View>
-    </View>
+    </ImageBackground>
   )
 }
 
@@ -88,12 +92,64 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#FDEDEC',
+    width: '100%',
   },
+
+  bg: {
+    flex: 1,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+
+  
+  card: {
+    padding: 10,
+    marginHorizontal: 8,
+    borderRadius: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.270)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    height: '80%',
+    width: '80%',
+  },
+  
+  card_title: {
+    color: 'white',
+    fontSize: 25,
+  },
+
+  card_text_temp: {
+    color: 'white',
+    fontSize: 55,
+    fontWeight: "400",
+  },
+
+  card_text_tempMax: {
+    color: 'white',
+    fontSize: 16,
+  },
+  
+  card_text: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: "400",
+  },
+
+  card_info: {
+   alignItems: 'center',
+  },
+
   btn_row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+
+
+
 });
 
 export default Weather;
