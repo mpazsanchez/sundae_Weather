@@ -65,7 +65,7 @@ const ViewAllCities = ({ navigation }) => {
             <View style={styles.btn_row} >
 
             <TouchableOpacity
-                title='Detalles'
+                title='Clima'
                 style={styles.btn_card}
                 onPress={() => navigation.navigate('Weather', { paramKey: item.city_id, })}>
 
