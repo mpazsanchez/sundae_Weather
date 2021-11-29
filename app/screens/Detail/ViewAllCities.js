@@ -27,9 +27,9 @@ const ViewAllCities = ({ navigation }) => {
   });
 
   const filterList = (search) => {
-    setSearch(search.toLowerCase());
+    setSearch(search);
     const filter = flatListItems.filter((item) => {
-      return item.city_name.toLowerCase().match(search);
+      return item.city_name.toLowerCase().match(search.toLowerCase());
     });
     setFilteredItems(filter);
     if (!search || search === "") {
