@@ -55,6 +55,12 @@ const Add = ({ navigation }) => {
     }
 
   }, [coordCity]);
+  
+  useEffect(() => {
+    return () => {
+      setCoordCity({}); 
+    };
+  }, []);
 
   // Obtener latitud y longitud de la ciudad y actualizar coordenadas
   const getGeolocation = (values) => {

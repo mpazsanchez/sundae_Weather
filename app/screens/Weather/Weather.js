@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, StyleSheet, Alert, ImageBackground } from 'react-native';
+import { View, Text, Image, StyleSheet, Alert, ImageBackground } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import axios from 'axios';
 import iconRef from '../../utils/iconRef.js';
@@ -11,6 +11,7 @@ function Weather({ route, navigation }) {
   const [userCity, setUserCity] = useState({});
   const [infoCity, setInfoCity] = useState({});
 
+  // Obtener la informacion de la ciudad
   db.transaction((tx) => {
     tx.executeSql('SELECT * FROM tbl_city where city_id = ?',
       [route.params.paramKey],
@@ -24,26 +25,22 @@ function Weather({ route, navigation }) {
       });
   });
 
-  //API_KEY = '562c8cf7ac4589daca68d9eeaa5237ea';
-
+  // Obtener la informacion del clima
   function getWeather() {
 
     if (userCity.city_name != null) {
-      axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${userCity.latitud}&lon=${userCity.longitud}&appid=128cbb6d697b9515f235f503e5961922&units=metric&lang=esp`)
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${userCity.latitud}&lon=${userCity.longitud}&appid=128cbb6d697b9515f235f503e5961922&units=metric&lang=es`)
         .then(response => {
           const info = response.data;
           setInfoCity({
             ciudad: userCity.city_name,
             pais: info.sys.country,
-            //condiciones: info.weather[0].description,
+            description: info.weather[0].description,
             condiciones: info.weather[0].icon,
-            temperatura: info.main.temp,
-            temp_max: info.main.temp_max,
-            temp_min: info.main.temp_min,
+            temperatura: Math.round(info.main.temp),
             humedad: info.main.humidity,
             viento: info.wind.speed,
           })
-          console.log('weather', info)
         })
     }
   }
@@ -57,30 +54,19 @@ function Weather({ route, navigation }) {
   return (
     <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
       <View style={styles.container}>
-
-
-                <View style={styles.card}>
-
-                    <Text style={styles.card_title}>{ciudad}, {infoCity.pais}</Text>
-
-                    <Text style={styles.card_text_temp}>{infoCity.temperatura}°</Text>
-                  <Image
-                      style={{width: 85, height: 85}}
-                      source={iconRef[infoCity.condiciones]}
-                    />
-
-                    <Text style={styles.card_text_tempMax}>
-                    {infoCity.temp_max}°/{infoCity.temp_min}°</Text>
-
-                    <View style={styles.card_info}> 
-                        <Text style={styles.card_text}>Condiciones: {infoCity.condiciones}</Text>
-                        <Text style={styles.card_text}>Humedad: {infoCity.humedad} % </Text>
-                        <Text style={styles.card_text}>Viento: {infoCity.viento} m/s</Text>
-                    </View>
-
-                </View>
-
-
+        <View style={styles.card}>
+            <Text style={styles.card_title}>{ciudad}, {infoCity.pais}</Text>
+            <Text style={styles.card_text_temp}>{infoCity.temperatura}°</Text>
+          <Image
+              style={{width: 85, height: 85}}
+              source={iconRef[infoCity.condiciones]}
+            />
+            <View style={styles.card_info}> 
+              <Text style={styles.card_text}>Condición: {infoCity.description}</Text>
+              <Text style={styles.card_text}>Humedad: {infoCity.humedad} % </Text>
+              <Text style={styles.card_text}>Viento: {infoCity.viento} m/s</Text>
+            </View>
+        </View>
       </View>
     </ImageBackground>
   )

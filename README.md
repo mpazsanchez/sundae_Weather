@@ -32,6 +32,12 @@ git clone https://github.com/ecvivar/sundae_Weather
 - Persistencia de datos: SQLite
 - Versionamiento de código: Git y Github
 
+## Herramientas de UX
+Realizamos un persona canvas en Canvas
+![persona canvas](/app/assets/Persona_Canva_Paula.png)
+Y un prototipo en Figma
+<!-- ![persona canvas](/app/assets/prototipo.png) -->
+
 ## Equipo
 - [Mariel de la Mano]
 - Pablo Maria Sanguinetti Flores
