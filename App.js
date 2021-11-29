@@ -10,6 +10,7 @@ import Weather from './app/screens/Weather';
 import Add from './app/screens/Add';
 import ViewAllCities from './app/screens/Detail/ViewAllCities';
 import Delete from './app/screens/Delete';
+import About from './app/screens/About/About';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ const App = () => {
       }}>
         <Stack.Screen name="Home" component={Home} options={ {title: 'Home'} }/>
         <Stack.Screen name="Detail" component={Detail} />
+        <Stack.Screen name="About" component={About} options={ {title: 'Acerca nuestro'} } />
         <Stack.Screen name="Maps" component={Maps} options={ {title: 'Ubicación'} }/>
         <Stack.Screen name="Weather" component={Weather} options={ {title: 'Clima actual'} }/>
         <Stack.Screen name="Add" component={Add} options={ {title: 'Agregar ciudad'} } />

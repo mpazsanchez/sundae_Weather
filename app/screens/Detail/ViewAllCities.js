@@ -39,7 +39,7 @@ const ViewAllCities = ({ navigation }) => {
 
   useEffect(() => {
     return () => {
-      setFlatListItems({}); // This worked for me
+      setFlatListItems({}); 
     };
   }, []);
 
@@ -58,9 +58,9 @@ const ViewAllCities = ({ navigation }) => {
         renderItem={({ item }) => (
 
           <View key={item.city_id} style={styles.card}>
-            <Text style={styles.card_text_temp}>25º{item.city_temp}</Text>
-            <Text style={styles.card_conditions}>10º/28º, Soleado {item.city_X}</Text>
-            <Text style={styles.card_text}>{item.city_name}, {item.city_country}</Text>
+
+            <Text style={styles.card_text}>{item.city_name}</Text>
+            <Text style={styles.card_text}>{item.city_country}</Text>
 
             <View style={styles.btn_row} >
 
