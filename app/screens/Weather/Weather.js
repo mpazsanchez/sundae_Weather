@@ -49,6 +49,12 @@ function Weather({ route, navigation }) {
     getWeather()
   }, [userCity.city_name]);
 
+  useEffect(() => {
+    return () => {
+      setInfoCity({}); 
+      setUserCity({});
+    };
+  }, []);
 
   const { ciudad, pais, condiciones, temperatura, humedad, viento } = infoCity;
   return (

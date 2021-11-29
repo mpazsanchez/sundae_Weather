@@ -15,13 +15,9 @@ const Home = ({ navigation }) => {
       "SELECT name FROM sqlite_master WHERE type='table' AND name='tbl_city'",
       [],
       function (tx, results) {
-        console.log('Alert found tables:', results.rows.length);
         if (results.rows.length == 0) {
           txn.executeSql('CREATE TABLE tbl_city (city_id INTEGER PRIMARY KEY AUTOINCREMENT, city_name VARCHAR(100), city_state VARCHAR(100), city_country VARCHAR(100), latitud FLOAT(100), longitud FLOAT(100))');
-          console.log('Se creo la tabla');
-        } else {
-          console.log('La tabla city ya existe');
-        }
+        } 
       }
     );
   });
