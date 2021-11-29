@@ -5,7 +5,8 @@ import {
   Dimensions,
   Text,
   Button,
-  Alert
+  Alert,
+  TouchableOpacity,
 } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -48,7 +49,6 @@ const Maps = ({ route, navigation }) => {
             'INSERT INTO tbl_city (city_name, city_state, city_country, latitud, longitud) VALUES (?,?,?,?,?)',
             [ciudad, provincia, pais, lat, lon],
             (tx, results) => {
-//              console.log('Results', results.rowsAffected);
               if (results.rowsAffected > 0) {
                 Alert.alert(
                   'Success',
@@ -82,24 +82,33 @@ const Maps = ({ route, navigation }) => {
           coordinate={{ latitude: location.latitude, longitude: location.longitude }}
         />
       </MapView>
+
       <View style={styles.bottomView}>
         <View style={styles.txt_map}>
           <Text>Ciudad: {ciudad} </Text>
           <Text>Latitud: {lat}</Text>
           <Text>Longitud: {lon}</Text>
         </View>
-        <View style={styles.btn_row}>
-          <Button
-            title="Cancelar"
-            color="#CD5C5C"
-            onPress={() => navigation.navigate("Add")}
-          />
-          <Button
-            title="Confirmar"
-            color="#CD5C5C"
-            onPress={() => registerCity()}
-          />
+
+        <View style={styles.btn_row} >
+
+          <TouchableOpacity
+              title='Cancelar'
+              style={styles.btn_card}
+              onPress={() => navigation.navigate("Add")}
+          >
+            <Text style={styles.btn_card_text} >Cancelar</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+              title='Confirmar'
+              style={styles.btn_card}
+              onPress={() => registerCity()}
+            >
+            <Text style={styles.btn_card_text} >Confirmar</Text>
+          </TouchableOpacity>
         </View>
+        
       </View>
     </View>
   );
@@ -133,11 +142,35 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     height: 80,
-    width: "60%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
     bottom: 30,
+  },
+  btn_row: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignContent: 'flex-end',
+  },
+  btn_card: {
+    marginTop: 12,
+    borderRadius: 15,
+    backgroundColor: '#ff9696d0',
+    height: 40,
+    width: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+
+  },
+
+  btn_card_text: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "500",
+    letterSpacing: 1,
   },
 });
 

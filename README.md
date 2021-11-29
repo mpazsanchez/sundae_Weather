@@ -34,9 +34,12 @@ git clone https://github.com/ecvivar/sundae_Weather
 
 ## Herramientas de UX
 Realizamos un persona canvas en Canvas
+
 ![persona canvas](/app/assets/Persona_Canva_Paula.png)
+
 Y un prototipo en Figma
-<!-- ![persona canvas](/app/assets/prototipo.png) -->
+
+![persona canvas](/app/assets/prototipo.png)
 
 ## Equipo
 - [Mariel de la Mano]

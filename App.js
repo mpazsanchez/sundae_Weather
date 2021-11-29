@@ -28,7 +28,7 @@ const App = () => {
       }}>
         <Stack.Screen name="Home" component={Home} options={ {title: 'Home'} }/>
         <Stack.Screen name="Detail" component={Detail} />
-        <Stack.Screen name="About" component={About} options={ {title: 'Acerca nuestro'} } />
+        <Stack.Screen name="About" component={About} options={ {title: 'Nosotros'} } />
         <Stack.Screen name="Maps" component={Maps} options={ {title: 'Ubicación'} }/>
         <Stack.Screen name="Weather" component={Weather} options={ {title: 'Clima actual'} }/>
         <Stack.Screen name="Add" component={Add} options={ {title: 'Agregar ciudad'} } />
