@@ -51,7 +51,7 @@ const Home = ({ navigation }) => {
               style={styles.btn_card}
               onPress={() => navigation.navigate('About')}
             >
-            <Text style={styles.btn_card_text} >Acerca nuestro</Text>
+            <Text style={styles.btn_card_text}>Nosotros</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   
   text_title: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '500',
     width: '85%',
   },

@@ -90,14 +90,14 @@ const Maps = ({ route, navigation }) => {
         </View>
         <View style={styles.btn_row}>
           <Button
-            title="Cancelar"
-            color="#CD5C5C"
-            onPress={() => navigation.navigate("Add")}
-          />
-          <Button
             title="Confirmar"
             color="#CD5C5C"
             onPress={() => registerCity()}
+          />
+          <Button
+            title="Cancelar"
+            color="#CD5C5C"
+            onPress={() => navigation.navigate("Add")}
           />
         </View>
       </View>
