@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '70%',
+    height: '85%',
     width: '80%',
   },
 
@@ -259,8 +259,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   errorText: {
-    fontSize: 10,
-    color: "red",
+    fontSize: 12,
+    color: "black",
+    fontWeight: '500',
   },
 });
 

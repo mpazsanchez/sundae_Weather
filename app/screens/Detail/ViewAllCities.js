@@ -59,13 +59,13 @@ const ViewAllCities = ({ navigation }) => {
 
           <View key={item.city_id} style={styles.card}>
 
-            <Text style={styles.card_text}>{item.city_name}</Text>
-            <Text style={styles.card_text}>{item.city_country}</Text>
+            <Text style={styles.card_city}>{item.city_name}</Text>
+            <Text style={styles.card_country}>{item.city_country}</Text>
 
             <View style={styles.btn_row} >
 
             <TouchableOpacity
-                title='Detalles'
+                title='Clima'
                 style={styles.btn_card}
                 onPress={() => navigation.navigate('Weather', { paramKey: item.city_id, })}>
 
@@ -134,18 +134,19 @@ const styles = StyleSheet.create({
  
   },
 
-  card_text: {
+  card_city: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "400",
     paddingTop: 8,
   },
-
-  card_text_temp: {
+  
+  card_country: {
     color: 'white',
-    fontSize: 25,
-    fontWeight: "500",
+    fontSize: 16,
+    paddingTop: 8,
   },
+
 
   card_conditions: {
     color: 'white',

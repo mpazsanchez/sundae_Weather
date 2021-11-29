@@ -90,6 +90,7 @@ const Maps = ({ route, navigation }) => {
           <Text>Longitud: {lon}</Text>
         </View>
 
+
         <View style={styles.btn_row} >
 
           <TouchableOpacity
@@ -107,6 +108,8 @@ const Maps = ({ route, navigation }) => {
             >
             <Text style={styles.btn_card_text} >Confirmar</Text>
           </TouchableOpacity>
+
+
         </View>
         
       </View>
