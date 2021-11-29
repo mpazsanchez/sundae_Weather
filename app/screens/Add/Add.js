@@ -8,11 +8,13 @@ import {
   StatusBar,
   TouchableOpacity,
   Alert,
+  ImageBackground,
 } from "react-native";
 import * as SQLite from "expo-sqlite";
 import { Formik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
+import Bg from '../../assets/bg-gradient.jpg';
 
 const db = SQLite.openDatabase('city_db.db');
 
@@ -96,9 +98,14 @@ const Add = ({ navigation }) => {
       });
   };
   return (
-    <>
+  <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
+
       <SafeAreaView style={styles.container}>
-        <View style={styles.input}>
+
+        <View style={styles.card}>
+
+        <Text style={styles.text_title}>¿Qué ciudad deseas agregar?</Text>
+
           <Formik
             validationSchema={addCityValidationSchema}
             initialValues={{
@@ -108,6 +115,7 @@ const Add = ({ navigation }) => {
             }}
             onSubmit={(values) => getGeolocation(values)}
           >
+
             {({
               handleChange,
               handleBlur,
@@ -117,7 +125,9 @@ const Add = ({ navigation }) => {
               touched,
               isValid,
             }) => (
-              <>
+            <>
+                
+
                 <TextInput
                   name="city_name"
                   style={styles.text_input}
@@ -163,58 +173,84 @@ const Add = ({ navigation }) => {
                   title="Agregar Ciudad"
                   disabled={!isValid || values.city_name === ""}
                 >
-                  <Text style={styles.text_btn}> Agregar Ciudad</Text>
+                  <Text style={styles.text_btn}> Agregar </Text>
                 </TouchableOpacity>
               </>
             )}
           </Formik>
         </View>
       </SafeAreaView>
-    </>
+
+  </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-around",
-    backgroundColor: "#FDEDEC",
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
   },
+
+  bg: {
+    flex: 1,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+
   text: {
     fontSize: 40,
     margin: 10,
+    textAlign: 'center',
   },
-  input: {
-    height: 300,
-    justifyContent: "center",
-    backgroundColor: "white",
-    padding: 5,
-    paddingHorizontal: 40,
-    marginTop: StatusBar.currentHeight || 0,
+
+  text_title: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '500',
+    width: '85%',
   },
+
+  card: {
+    padding: 10,
+    marginHorizontal: 8,
+    borderRadius: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.270)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '70%',
+    width: '80%',
+  },
+
   text_input: {
     height: 40,
-    width: "100%",
+    width: "85%",
     margin: 10,
     paddingLeft: 20,
-    backgroundColor: "white",
-    borderColor: "black",
+    backgroundColor: 'rgba(255, 255, 255, 0.270)',
+    color: 'white',
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 10,
   },
   btn_input: {
     height: 40,
-    width: "100%",
+    width: "85%",
     margin: 10,
-    backgroundColor: "#CD5C5C",
-    borderColor: "#CD5C5C",
-    borderWidth: 1,
+    backgroundColor: '#ff9696d0',
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
   },
   text_btn: {
     color: "white",
+    fontWeight: '500',
+    fontSize: 16,
   },
   btn_row: {
     top: 30,
