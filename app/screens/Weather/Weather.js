@@ -4,12 +4,14 @@ import * as SQLite from 'expo-sqlite';
 import axios from 'axios';
 import iconRef from '../../utils/iconRef.js';
 import Bg from '../../assets/bg-gradient.jpg';
+import Loading from '../Loading.js';
 
 const db = SQLite.openDatabase('city_db.db');
 
-function Weather({ route, navigation }) {
+function Weather({ route }) {
   const [userCity, setUserCity] = useState({});
   const [infoCity, setInfoCity] = useState({});
+  const [isVisible, setIsVisible] = useState(true);
 
   // Obtener la informacion de la ciudad
   db.transaction((tx) => {
@@ -41,6 +43,7 @@ function Weather({ route, navigation }) {
             humedad: info.main.humidity,
             viento: info.wind.speed,
           })
+          setIsVisible(false);
         })
     }
   }
@@ -56,12 +59,12 @@ function Weather({ route, navigation }) {
     };
   }, []);
 
-  const { ciudad, pais, condiciones, temperatura, humedad, viento } = infoCity;
   return (
     <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
+      <Loading isVisible={isVisible} />
       <View style={styles.container}>
         <View style={styles.card}>
-            <Text style={styles.card_title}>{ciudad}, {infoCity.pais}</Text>
+            <Text style={styles.card_title}>{infoCity.ciudad}, {infoCity.pais}</Text>
             <Text style={styles.card_text_temp}>{infoCity.temperatura}°</Text>
           <Image
               style={{width: 85, height: 85}}
@@ -95,7 +98,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
 
-  
   card: {
     padding: 10,
     marginHorizontal: 8,
@@ -138,8 +140,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-
-
 
 });
 

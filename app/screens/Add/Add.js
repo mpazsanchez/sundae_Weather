@@ -5,7 +5,6 @@ import {
   Text,
   TextInput,
   SafeAreaView,
-  StatusBar,
   TouchableOpacity,
   Alert,
   ImageBackground,
@@ -15,6 +14,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import Bg from '../../assets/bg-gradient.jpg';
+import Loading from "../Loading";
 
 const db = SQLite.openDatabase('city_db.db');
 
@@ -40,6 +40,7 @@ const addCityValidationSchema = yup.object().shape({
 const Add = ({ navigation }) => {
   // useState para tomar las coordenadas
   const [coordCity, setCoordCity] = useState({});
+  const [isVisible, setIsVisible] = useState(false);
 
   // Al actualizar coordenadas, ubica la ciudad en el mapa
   const initialRender = useRef(true);
@@ -71,6 +72,8 @@ const Add = ({ navigation }) => {
       query: `${values.city_name} ${values.city_state} ${values.city_country}`,
     };
 
+    setIsVisible(true);
+
     axios
       .get("http://api.positionstack.com/v1/forward", { params })
       .then((response) => {
@@ -97,15 +100,13 @@ const Add = ({ navigation }) => {
         );
       });
   };
+
   return (
   <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
-
-      <SafeAreaView style={styles.container}>
-
-        <View style={styles.card}>
-
+    <SafeAreaView style={styles.container}>
+      <View style={styles.card}>
+        <Loading isVisible={isVisible} />
         <Text style={styles.text_title}>¿Qué ciudad deseas agregar?</Text>
-
           <Formik
             validationSchema={addCityValidationSchema}
             initialValues={{
@@ -115,7 +116,6 @@ const Add = ({ navigation }) => {
             }}
             onSubmit={(values) => getGeolocation(values)}
           >
-
             {({
               handleChange,
               handleBlur,
@@ -126,61 +126,58 @@ const Add = ({ navigation }) => {
               isValid,
             }) => (
             <>
-                
+              <TextInput
+                name="city_name"
+                style={styles.text_input}
+                placeholder="Nombre de la Ciudad"
+                onChangeText={handleChange("city_name")}
+                onBlur={handleBlur("city_name")}
+                value={values.city_name}
+              />
 
-                <TextInput
-                  name="city_name"
-                  style={styles.text_input}
-                  placeholder="Nombre de la Ciudad"
-                  onChangeText={handleChange("city_name")}
-                  onBlur={handleBlur("city_name")}
-                  value={values.city_name}
-                />
+              {errors.city_name && touched.city_name && (
+                <Text style={styles.errorText}>{errors.city_name}</Text>
+              )}
 
-                {errors.city_name && touched.city_name && (
-                  <Text style={styles.errorText}>{errors.city_name}</Text>
-                )}
+              <TextInput
+                name="city_state"
+                style={styles.text_input}
+                placeholder="Nombre de la Provincia"
+                onChangeText={handleChange("city_state")}
+                onBlur={handleBlur("city_state")}
+                value={values.city_state}
+              />
 
-                <TextInput
-                  name="city_state"
-                  style={styles.text_input}
-                  placeholder="Nombre de la Provincia"
-                  onChangeText={handleChange("city_state")}
-                  onBlur={handleBlur("city_state")}
-                  value={values.city_state}
-                />
+              {errors.city_state && touched.city_state && (
+                <Text style={styles.errorText}>{errors.city_state}</Text>
+              )}
 
-                {errors.city_state && touched.city_state && (
-                  <Text style={styles.errorText}>{errors.city_state}</Text>
-                )}
+              <TextInput
+                name="city_country"
+                style={styles.text_input}
+                placeholder="Nombre del Pais"
+                onChangeText={handleChange("city_country")}
+                onBlur={handleBlur("city_country")}
+                value={values.city_country}
+              />
 
-                <TextInput
-                  name="city_country"
-                  style={styles.text_input}
-                  placeholder="Nombre del Pais"
-                  onChangeText={handleChange("city_country")}
-                  onBlur={handleBlur("city_country")}
-                  value={values.city_country}
-                />
+              {errors.city_country && touched.city_country && (
+                <Text style={styles.errorText}>{errors.city_country}</Text>
+              )}
 
-                {errors.city_country && touched.city_country && (
-                  <Text style={styles.errorText}>{errors.city_country}</Text>
-                )}
-
-                <TouchableOpacity
-                  style={styles.btn_input}
-                  onPress={handleSubmit}
-                  title="Agregar Ciudad"
-                  disabled={!isValid || values.city_name === ""}
-                >
-                  <Text style={styles.text_btn}> Agregar </Text>
-                </TouchableOpacity>
-              </>
-            )}
-          </Formik>
-        </View>
-      </SafeAreaView>
-
+              <TouchableOpacity
+                style={styles.btn_input}
+                onPress={handleSubmit}
+                title="Agregar Ciudad"
+                disabled={!isValid || values.city_name === ""}
+              >
+                <Text style={styles.text_btn}> Agregar </Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </Formik>
+      </View>
+    </SafeAreaView>
   </ImageBackground>
   );
 };

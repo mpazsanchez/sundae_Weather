@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Dimensions,
   Text,
-  Button,
   Alert,
   TouchableOpacity,
 } from 'react-native';
@@ -51,7 +50,7 @@ const Maps = ({ route, navigation }) => {
             (tx, results) => {
               if (results.rowsAffected > 0) {
                 Alert.alert(
-                  'Success',
+                  'Éxito',
                   'La ciudad ha sido agregada correctamente',
                   [
                     {
