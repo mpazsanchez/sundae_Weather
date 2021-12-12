@@ -39,7 +39,7 @@ Realizamos un persona canvas en Canvas
 
 Y un prototipo en Figma
 
-![persona canvas](/app/assets/Desktop - 2.jpg)
+![persona canvas](/app/assets/wireframe.png)
 
 
 ## Equipo
