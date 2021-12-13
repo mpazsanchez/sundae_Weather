@@ -6,11 +6,14 @@ import iconRef from '../../utils/iconRef.js';
 import Bg from '../../assets/bg-gradient.jpg';
 import Loading from '../Loading.js';
 
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faMapMarkerAlt, faWind, faTint } from "@fortawesome/free-solid-svg-icons";
+
 const db = SQLite.openDatabase('city_db.db');
 
 function Weather({ route }) {
   const [userCity, setUserCity] = useState({});
-  const [infoCity, setInfoCity] = useState({});
+  const [infoCity, setInfoCity] = useState({}); 
   const [isVisible, setIsVisible] = useState(true);
 
   // Obtener la informacion de la ciudad
@@ -62,20 +65,33 @@ function Weather({ route }) {
   return (
     <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
       <Loading isVisible={isVisible} />
+
       <View style={styles.container}>
+
         <View style={styles.card}>
-            <Text style={styles.card_title}>{infoCity.ciudad}, {infoCity.pais}</Text>
-            <Text style={styles.card_text_temp}>{infoCity.temperatura}°</Text>
-          <Image
-              style={{width: 85, height: 85}}
-              source={iconRef[infoCity.condiciones]}
-            />
-            <View style={styles.card_info}> 
-              <Text style={styles.card_text}>Condición: {infoCity.description}</Text>
-              <Text style={styles.card_text}>Humedad: {infoCity.humedad} % </Text>
-              <Text style={styles.card_text}>Viento: {infoCity.viento} m/s</Text>
+
+            <Text style={styles.card_title}><FontAwesomeIcon icon={faMapMarkerAlt} style={styles.icon} /> {infoCity.ciudad}, {infoCity.pais}</Text>
+
+            <View style={styles.card_temp}>
+                <Text style={styles.card_text_temp}>{infoCity.temperatura}° </Text>
+                <Image
+                    style={{width: 75, height: 75}}
+                    source={iconRef[infoCity.condiciones]}
+                  />
             </View>
+
+            <View style={styles.card_info}> 
+              <Text style={styles.card_details}>Detalles</Text>
+
+              <View style={styles.card_details_container}>
+                <Text style={styles.card_text}>Condiciones: {infoCity.description}</Text>
+                <Text style={styles.card_text}><FontAwesomeIcon icon={faTint} style={styles.icon} /> Humedad: {infoCity.humedad} % </Text>
+                <Text style={styles.card_text}><FontAwesomeIcon icon={faWind} style={styles.icon} /> Viento: {infoCity.viento} m/s</Text>
+              </View>
+            </View>
+
         </View>
+
       </View>
     </ImageBackground>
   )
@@ -115,6 +131,16 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
 
+  icon: {
+    color: 'white',
+  },
+
+  card_temp: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+
   card_text_temp: {
     color: 'white',
     fontSize: 55,
@@ -132,8 +158,25 @@ const styles = StyleSheet.create({
     fontWeight: "400",
   },
 
+  card_details: {
+    fontSize: 20,
+    color: 'white',
+    paddingBottom: 16,
+
+  },
+
+  card_details_container: {
+    borderTopColor: 'white',
+    borderTopWidth: 1,
+    borderStyle: 'solid',
+    paddingTop: 20,
+
+  },
+
   card_info: {
    alignItems: 'center',
+
+
   },
 
   btn_row: {

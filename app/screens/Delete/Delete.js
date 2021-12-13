@@ -37,6 +37,20 @@ const Delete = ({ route, navigation }) => {
             
       </TouchableOpacity>
 
+      <TouchableOpacity
+      style={styles.btn_cancel}
+            title="Delete"
+            color="#CD5C5C"
+            onPress={
+              () => {
+               navigation.navigate('ViewAllCities');
+              }
+            }
+          >
+            <Text style={styles.text_btn}> Cancelar </Text>
+            
+      </TouchableOpacity>
+
     </View>
     </ImageBackground>
   );
@@ -71,6 +85,17 @@ const styles = StyleSheet.create({
   },
 
   btn: {
+    marginTop: 12,
+    borderRadius: 15,
+    backgroundColor: '#ff9696d0',
+    height: 40,
+    width: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+  },
+
+  btn_cancel: {
     marginTop: 12,
     borderRadius: 15,
     backgroundColor: '#ff9696d0',

@@ -35,6 +35,7 @@ const Maps = ({ route, navigation }) => {
           var len = results.rows.length;
           if (len > 0) {
             Alert.alert('Advertencia', 'La ciudad ya se encuentra en el listado',
+
               [
                 {
                   text: 'Ok',
@@ -50,8 +51,8 @@ const Maps = ({ route, navigation }) => {
             (tx, results) => {
               if (results.rowsAffected > 0) {
                 Alert.alert(
-                  'Éxito',
-                  'La ciudad ha sido agregada correctamente',
+                  'Excelente',
+                  '¡La ciudad ha sido agregada correctamente!',
                   [
                     {
                       text: 'Ok',
@@ -93,19 +94,19 @@ const Maps = ({ route, navigation }) => {
         <View style={styles.btn_row} >
 
           <TouchableOpacity
-              title='Cancelar'
-              style={styles.btn_card}
-              onPress={() => navigation.navigate("Add")}
-          >
-            <Text style={styles.btn_card_text} >Cancelar</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
               title='Confirmar'
               style={styles.btn_card}
               onPress={() => registerCity()}
             >
             <Text style={styles.btn_card_text} >Confirmar</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+              title='Cancelar'
+              style={styles.btn_card}
+              onPress={() => navigation.navigate("Add")}
+          >
+            <Text style={styles.btn_card_text} >Cancelar</Text>
           </TouchableOpacity>
 
 
@@ -129,18 +130,21 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
   },
   btn_row: {
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignContent: 'center',
+    margin: 10,
   },
   txt_map: {
     margin: 10,
-    backgroundColor: 'white',
-    borderColor: 'black',
+    padding: 15,
     borderWidth: 1,
-    borderRadius: 10,
+    backgroundColor: '#ff9696d0',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 15,
   },
   bottomView: {
     height: 80,
@@ -149,15 +153,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     bottom: 30,
+ 
   },
-  btn_row: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignContent: 'flex-end',
-  },
+
   btn_card: {
-    marginTop: 12,
+    margin: 12,
     borderRadius: 15,
     backgroundColor: '#ff9696d0',
     height: 40,

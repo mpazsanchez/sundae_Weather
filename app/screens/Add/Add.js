@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   text_title: {
     color: 'white',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
     width: '85%',
   },
 
@@ -234,12 +234,13 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 10,
+    fontWeight: "600",
   },
   btn_input: {
     height: 40,
     width: "85%",
     margin: 10,
-    backgroundColor: '#ff9696d0',
+    backgroundColor: '#FF9696',
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",

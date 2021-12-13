@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   text: {
     color: "#FF9696",
     marginTop: 10,
+    marginBottom: 14,
   },
   view: {
     flex: 1,
@@ -24,12 +25,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   overlay: {
-    height: 150,
-    width: 150,
+    height: 130,
+    width: 130,
     backgroundColor: "#fff",
     borderColor: "#FF9696",
-    borderWidth: 2,
-    borderRadius: 10,
+    borderWidth: 1,
+    borderRadius: 70,
   },
 });
 

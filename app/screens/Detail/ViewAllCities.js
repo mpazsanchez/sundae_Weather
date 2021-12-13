@@ -10,9 +10,8 @@ import {
 } from "react-native";
 import * as SQLite from "expo-sqlite";
 import Bg from "../../assets/bg-gradient.jpg";
-
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMapMarkerAlt, faTrashAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { SearchBar } from "react-native-elements";
 import Loading from "../Loading";
 
@@ -50,7 +49,7 @@ const ViewAllCities = ({ navigation }) => {
   let content = (
     <View style={styles.card}>
       <Text style={styles.text}>
-        No hay ciudades en el listado, agrega para continuar.
+        No hay ciudades en el listado, agrega una para continuar
       </Text>
     </View>
   );
@@ -59,7 +58,7 @@ const ViewAllCities = ({ navigation }) => {
     content = (
       <>
         <SearchBar
-          placeholder="Filtra las ciudades"
+          placeholder="Filtrar ciudades"
           placeholderTextColor={"white"}
           onChangeText={filterList}
           value={search}
@@ -74,7 +73,7 @@ const ViewAllCities = ({ navigation }) => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View key={item.city_id} style={styles.card}>
-              <Text style={styles.card_city}>{item.city_name}</Text>
+              <Text style={styles.card_city}><FontAwesomeIcon icon={faMapMarkerAlt} style={styles.iconMap}/> {item.city_name}</Text>
               <Text style={styles.card_country}>{item.city_country}</Text>
 
               <View style={styles.btn_row}>
@@ -90,12 +89,13 @@ const ViewAllCities = ({ navigation }) => {
 
                 <TouchableOpacity
                   title="Eliminar"
-                  style={styles.btn_card}
+                  style={styles.btn_card_delete}
                   onPress={() =>
                     navigation.navigate("Delete", { paramKey: item.city_id })
                   }
                 >
-                  <Text style={styles.btn_card_text}>Eliminar</Text>
+                  <FontAwesomeIcon icon={faTrashAlt} style={styles.iconTrash}/>
+                  
                 </TouchableOpacity>
               </View>
             </View>
@@ -191,6 +191,17 @@ const styles = StyleSheet.create({
     color: "white",
   },
 
+  btn_card_delete: {
+    marginTop: 12,
+    backgroundColor: "#ff9696d0",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+    width: 40,
+    height: 40,
+    borderRadius: 100,
+  },
+
   btn_card_text: {
     color: "white",
     fontSize: 16,
@@ -202,13 +213,13 @@ const styles = StyleSheet.create({
   btn_row: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignContent: "center",
   },
 
   btn_add: {
     backgroundColor: "#fae4e4",
-    color: "#FF9696",
+    color: '#ff9696d0',
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -230,6 +241,14 @@ const styles = StyleSheet.create({
 
   icon: {
     color: "#FF9696",
+  },
+
+  iconMap: {
+    color: "white",
+  },
+
+  iconTrash: {
+    color: "white",
   },
 
   title: {
