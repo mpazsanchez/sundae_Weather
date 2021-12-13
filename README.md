@@ -39,7 +39,8 @@ Realizamos un persona canvas en Canvas
 
 Y un prototipo en Figma
 
-![persona canvas](/app/assets/prototipo.png)
+![persona canvas](/app/assets/wireframe.png)
+
 
 ## Equipo
 - [Mariel de la Mano]
