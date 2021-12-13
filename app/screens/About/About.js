@@ -4,8 +4,11 @@ import {
   Text,
   ScrollView,
   ImageBackground,
+  Animated
 } from "react-native";
 import Bg from '../../assets/bg-gradient.jpg';
+import Logo from '../../assets/sundae.png';
+import LogoText from '../../assets/logo.png';
 
 
 const About = ({ navigation }) => {
@@ -29,6 +32,12 @@ const About = ({ navigation }) => {
             otra del clima (openweathermap). Fue desarrollada en React Native y el diseño
             se hizo siguiendo los estilos de Material Design.
         </Text>
+
+        <Animated.Image source={Logo} style={styles.image} />
+          <Animated.Image source={LogoText} style={styles.imageText} />
+
+
+
       </ImageBackground>
     </ScrollView>
   );
@@ -48,7 +57,21 @@ const styles = StyleSheet.create({
       bg: {
         flex: 1,
         width: '100%',
+        alignItems: 'center',
       },
+      
+      image: {
+        marginTop: 50,
+        width: 50,
+        height: 50,
+
+      },
+      imageText: {
+        width: 150,
+        height: 75,
+        resizeMode: 'contain',
+        
+      }
 });
 
 export default About;
