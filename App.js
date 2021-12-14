@@ -21,15 +21,9 @@ const App = () => {
             <Stack.Navigator 
               screenOptions={{
                 headerStyle: {
-                  backgroundColor: '#ff9696d0',
+                  backgroundColor: '#fae4e4',
                 },
-                headerTintColor: '#FFFFFF',
-                
-                headerShadowVisible: false,
-                headerTitleStyle: {
-                    fontWeight: "700",
-                  
-                },
+                headerTintColor: '#FF9696',
         
       }}>
         <Stack.Screen name="Home" component={Home} options={ {title: 'Home'} }/>

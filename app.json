@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sundae_Weather_app",
-    "slug": "sundae_weather_app",
+    "name": "sundaeWeather",
+    "slug": "sundaeweather",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
