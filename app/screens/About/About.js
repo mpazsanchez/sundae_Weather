@@ -8,14 +8,14 @@ import {
 } from "react-native";
 import Bg from '../../assets/bg-gradient.jpg';
 import Logo from '../../assets/sundae.png';
-import LogoText from '../../assets/logo.png';
 
 
 const About = ({ navigation }) => {
 
   return (
-    <ScrollView>
       <ImageBackground source={Bg} resizeMode="cover" style={styles.bg}>
+        <ScrollView>
+
         <Text style={styles.text}>
             ¡Hola! Somos el grupo 24 que resultó de la unión de otros equipos.
             Somos cuatro personas apasionadas por la tecnología que unimos 
@@ -33,13 +33,12 @@ const About = ({ navigation }) => {
             se hizo siguiendo los estilos de Material Design.
         </Text>
 
+      </ScrollView>
+
         <Animated.Image source={Logo} style={styles.image} />
-          <Animated.Image source={LogoText} style={styles.imageText} />
-
-
-
+        
       </ImageBackground>
-    </ScrollView>
+    
   );
 };
 

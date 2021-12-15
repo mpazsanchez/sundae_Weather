@@ -72,6 +72,7 @@ const ViewAllCities = ({ navigation }) => {
           data={filteredItems || flatListItems}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
+            
             <View key={item.city_id} style={styles.card}>
               <Text style={styles.card_city}><FontAwesomeIcon icon={faMapMarkerAlt} style={styles.iconMap}/> {item.city_name}</Text>
               <Text style={styles.card_country}>{item.city_country}</Text>
