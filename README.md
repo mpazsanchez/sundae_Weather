@@ -44,7 +44,6 @@ Y un prototipo en Figma
 
 ## Equipo
 - [Mariel de la Mano]
-- Pablo Maria Sanguinetti Flores
 - [Maria Paz Sánchez]
 - Edison Cristian Vivar
 
